@@ -1,68 +1,162 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Migrations SGI 
+Este projeto tem por objetivo a unificação e melhor gerenciamento dos scripts de banco que serão incorporados aos sistemas da Agua&Solo,
+através do ORM Eloquent, de forma a facilitar o gerenciamento e implantação.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Instalação 
+Faça o git clone do projeto e, após baixar os arquivos, execute o comando para instalar as dependências
+```
+composer install
+```
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Ao terminar a instalação, na pasta raíz do projeto, efetue uma cópia do arquivo .env.example e cole-o renomendo para
+.env. 
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Comandos Básicos 
+### Criar uma migration 
+Para criar uma migration.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+* execute o comando:
 
-## Learning Laravel
+    ```
+     php artisan make:migration {nome_da_migration} --path=database/migrations/{ano-mes}
+    ```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Este comando irá criar uma migration na pasta definida pelo ano e mês, conforme estrutura definida pela equipe.<br>
+Conforme convenção, para criar uma migration que cria uma tabela, definimos o {nome_da_migration} pelo prefixo
+create_ e o sufixo _table. 
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+* Exemplo: 
+    ```
+    create_name_table_table.
+     
+    alter_name_table_table.
+     
+    insert_name_table_table
+    ``` 
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Conforme convenção, para criar uma migração que altere a estrutura de uma tabela, definimos o {nome_da_migration}
+pelo prefixo alter_ e o sufixo _table.
 
-## Laravel Sponsors
+* Exemplo: 
+    ```
+    alter_name_table_table.
+    ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Conforme convenção, o diretório da pasta é definido pelo {ano-mes} que a migration foi criada. 
+* Exemplo: 
+    ```
+    --path=database/migrations/2024-01
+    ```
 
-### Premium Partners
+Um arquivo com a estrutura padrão da migration será criada no diretório definido em --path=. 
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### Subir/Reverter migration para o Banco
 
-## Contributing
+Após criada a migration e modificado o arquivo da migração conforme sua necessidade, para subir a migration para o banco
+definido.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+* Rode o comando no terminal: 
+    ```
+    php artisan migrate --path=database/migrations/{ano-mes}
+    ```
+Caso precise reverter a migração que acabou de efetuar.
+* rode o seguinte comando: 
+    ``` 
+    php artisan migrate:rollback --path=database/migrations/{ano-mes}
+    ```
 
-## Code of Conduct
+Se as migrations executarem sem erros, uma mensagem de sucesso será mostrada no terminal.<br>
+Caso não, o erro aparacerá no terminal e você poderá corrigí-lo conforme for apontado.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Estrutura das migrations 
+#### Esqueleto padrão
+Ao criar uma migration, será criado um arquivo na pasta definida seguindo o seguinte esqueleto: 
 
-## Security Vulnerabilities
+```
+<?php 
+    use Illuminate\Support\Facades\Schema; 
+    use Illuminate\Database\Schema\Blueprint;
+    use Illuminate\Database\Migrations\Migration; 
+    
+    return new class extends Migration { 
+        /**
+        * Run the migrations.
+        */
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+        public function up(): void
+        { 
+            Schema::create('name_table', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+            });
+        } 
+        /* Reverse the migrations.
+        *
+        * @return void
+        */
+        public function down(): void
+        {
+            Schema::dropIfExists('name_table');
+        }
 
-## License
+    } 
+``` 
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-=======
-# agua-solo-migrations
+### Método up
+
+Dentro da estrutura existe o método public function up(), nele você define o que será criado quando executar o comando:
+```
+php artisan migrate
+```
+
+Para criação de uma tabela, crie a seguinte estrutura dentro do método: 
+```
+    Schema::create(‘name_table’, function(Blueprint $table) { 
+        $table->increments(‘cd_atn_lorem_ipsum’); 
+        $table->integer(‘id_responsavel’); $table->string(‘nm_name’,255); 
+        $table->boolean(‘st_active’);
+        $table->foreign('id_responsible')
+        ->references('id')
+        ->on('user');
+    }); 
+```
+Para criação de uma procedure, cria a seguinte estrutura dentro do método: 
+```
+DB::statement( 
+<<<SQL 
+    -- Crie aqui dentro o código SQL da sua procedure 
+SQL 
+); 
+```
+
+Mais informações a respeito de como montar a estrutura, Acesse a Documentação 
+
+### Método down
+Dentro da estrutura existe o método public function down(), nele você define o que será revertido quando executado o comando
+```
+php artisan migrate:rollback
+```
+Para apagar a tabela, cria a seguinte estrutura dentro do método:
+```
+Schema::table(‘name_table’,function (Blueprint $table) { 
+    $table->dropForeign([‘id_responsible’]); 
+    $table->dropIfExists('lorem_ipsum');
+});
+```
+Para apagar a procedure, cria a seguinte estrutura dentro do método: 
+```
+DB::statement( 
+<<<SQL 
+    -- Crie aqui dentro o código SQL para apagar a procedure 
+SQL
+); 
+```
+Mais informações a respeito de como montar a estrutura, Acesse a Documentação.
+
+### Considerações Finais 
+A documentação está em fase de desenvolvimento, caso encontre algum erro ou falha, favor adicionar correção o comunicar
+ao responsável.
+
+Todas as informações contidas na documentação foram baseadas na documentação oficial do Eloquent. Caso apresente uma
+dúvida específica, favor seguir a Documentação Oficial
