@@ -7,12 +7,21 @@ Faça o git clone do projeto e, após baixar os arquivos, execute o comando para
 ```
 composer install
 ```
-
+Se necessario também rode:
+```
+composer update
+```
 
 Ao terminar a instalação, na pasta raíz do projeto, efetue uma cópia do arquivo .env.example e cole-o renomendo para
 .env. 
 
 ## Comandos Básicos 
+### Rodar as migrations já criadas
+Primeiro crie uma Banco de Dados com o nome agua-solo-db, após rode o comando para gerar as tabelas no branco a partir das migration
+
+```
+php artisan migrate
+```
 ### Criar uma migration 
 Para criar uma migration.
 
