@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `user_station` (
   `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`,`station_id`),
   KEY `fk_station` (`station_id`),
-  CONSTRAINT `fk_user_station_estacao` FOREIGN KEY (`station_id`) REFERENCES `station` (`id`),
+  CONSTRAINT `fk_user_station_estacao` FOREIGN KEY (`station_id`) REFERENCES `stations` (`id`),
   CONSTRAINT `fk_user_station_usuario` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 SQL

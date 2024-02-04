@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `station_data` (
   `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`station_id`,`date`) USING BTREE,
   KEY `fk_station_date_station_idx` (`station_id`),
-  CONSTRAINT `fk_station_date_station` FOREIGN KEY (`station_id`) REFERENCES `station` (`id`)
+  CONSTRAINT `fk_station_date_station` FOREIGN KEY (`station_id`) REFERENCES `stations` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 SQL
                     );

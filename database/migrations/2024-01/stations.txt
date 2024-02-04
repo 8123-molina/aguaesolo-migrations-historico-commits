@@ -1,0 +1,123 @@
+stations
+
+Nome da Estação {stations.name}
+Município {stations.municipay}
+U.F. (stations.state)
+Roteiro (stations.route)
+Entidade Proprietária da Estação {interprises.name}
+Código da Entidade {interprises.ANA_code}
+CNPJ da Empresa {interprises.id}
+Entidade Operadora da Estação {interprises.name}
+Código PLU {stations.code_PLU}
+Código FLU {stations.code_FLU}
+Curso d’água {stations.river}
+Bacia Hidrográfica {basin.id}
+Área de Drenagem {stations.drainage_area} km²
+
+tipo de monitoramento {stations.monitoring_types} LTFPDSQ
+
+DESCRIÇÃO DOS TIPOS DE MONITORAMENTO {stations_monitorings_types.ids} (add itens)
+Item
+Tipo de Monitoramento
+Data da Instalação
+Data de Desativação
+Método de Obtenção
+Forma de Transmissão
+
+COORDENADA GEOGRÁFICA DOS TIPOS DE MONITORAMENTO
+Item
+Tipo de Monitoramento 
+Latitude {stations.latitude}
+Longitude {stations.longitude}
+Altitude (m)
+
+EQUIPAMENTOS INSTALADOS {stations_equipaments.id} (add itens)
+Equipamento
+Marca
+Modelo
+Autonomia
+Ativado em
+Desativado em
+
+LOCALIZAÇÃO {stations.localization TEXT} 
+Ex: A margem esquerda do rio Abunã, no vilarejo de Fortaleza do Abunã. A jusante da cachoeira.
+
+ACESSIBILIDADE À ESTAÇÃO DE MONITORAMENTO {stations.accessibility TEXT} 
+Ex: De Porto Velho pela rodovia BR-364 em direção a Rio Branco, até o entroncamento da estrada de acesso a Fortaleza do Abunã (18 km depois da balsa no rio Madeira). Pela estrada não pavimentada mais 13 km chega-se a estação.
+
+INFRAESTRUTURA EXISTENTE  {stations.infra TEXT} 
+Ex: ESCALAS: 08 (oito) lances de escalas em ferro, graduadas em centímetros, esmaltadas à fogo, numa amplitude de 11 (onze) metros. Lances: 8/9, 9/11, 11/13, 13/15, 15/17, 17/19, 19/21 e 21/23
+SEGURANÇA DO NIVELAMENTO: Foram construídos 02 (duas) RRNN: RN -1 = 23.988 e RN -2 = 24.504, sendo o mesmo construído em marco de concreto junto ao solo.
+TELEMETRIA: estação telemétrica com monitoramento fluvio-pluviométrico e transmissão a cada 15 minutos.
+
+POTAMOGRAFIA (rios afluentes) {stations.potamography}
+Ex: O rio Abunã nasce no estado do Acre, faz divisa entre o Brasil e a Bolívia e deságua no rio Madeira (ME) na altura da Vila de Abunã.
+
+SEÇÃO DE RÉGUAS {rulers_sections.id} (add itens)
+Margem (D,E)
+Amplitude (m)
+Altitude do Zero da Régua com relação ao nível do mar (m)
+Lances instalados 
+
+REFERÊNCIAS DE NÍVEL {level_references.id}
+RN
+Cota (mm)
+Altitude dos RN’s com relação ao nível do mar (m)
+Estabilidade
+Descrição dos RN’s
+
+COTA DE TRANSBORDAMENTO (SEÇÃO DE RÉGUAS (m) {stations.overflow_quota}
+MARGEM (ESQUERDA OU DIREITA)
+COTA (m)
+
+SEÇÃO DE MEDIÇÃO DE DESCARGA LÍQUIDA E SÓLIDA  {stations_measurements_liquid_solid.id} (add item)
+Distância da Seção de Réguas (m)
+Localização
+Tipo de Travessia
+Distância PI/PF (m)
+Natureza do Leito
+Processos de Medição
+
+MESES DE OPERAÇÃO DA ESTAÇÃO {stations.operation_months} (list csv)
+   janeiro              fevereiro	 março            abril	       maio         junho
+   julho                agosto  	 setembro         outubro      novembro     dezembro
+
+
+CARACTERÍSTICAS DO TRECHO (SEÇÃO DE MEDIÇÃO) {stations.section_characteristics} (TEXT_json)
+	REGIME:		    Perene 	    Intermitente		Efêmero
+	CONFORMAÇÃO:	Retilíneo	Anastomosado    	Meandrante		Curvo
+	FUNDO:			Regular	    Irregular
+
+
+NATUREZA E INCLINAÇÃO DAS MARGENS (SEÇÃO DE MEDIÇÃO)  {stations_inclinations.id} (add itens)
+MARGEM      NATUREZA    VEGETAÇÃO           INCLINAÇÃO
+DIREITA     ARENOSA     POUCA VEGETAÇÃO     BAIXA
+ESQUERDA    ARENOSA     SEM VEGETAÇÃO       BAIXA
+
+CONTROLE (SEÇÃO DE RÉGUAS - JUSANTE) {stations.ruler_section_control TEXT_json {"control_type": "", "ruler_section_distance": ""}
+TIPO DE CONTROLE                   CACHOEIRA A MONTANTE
+DISTÂNCIA DA SEÇÃO DE RÉGUAS (m)   10
+
+POSIÇÃO EM RELAÇÃO À REDE HIDROLÓGICA {stations.hydrological_network_position TEXT_json {"upstream_station": "", "downstream_station": ""}
+ESTAÇÃO A MONTANTE (CÓDIGO/ENTIDADE RESPONSÁVEL)
+ESTAÇÃO A JUSANTE (CÓDIGO/ENTIDADE RESPONSÁVEL)
+
+CROQUI DE LOCALIZAÇÃO E ACESSO {localization_sketch.id}
+(imagens)
+Nome do responsável pela elaboração do croqui de localização e de acesso:    Nelson Castro/ Johvanny Mendonça / Vitor Hugo de Souza
+Data:    08/02/2023
+
+
+IMAGEM DE LOCALIZAÇÃO DA ESTAÇAO NO GOOGLE EARTH {localization_sketch.id->satellite_image}
+(imagens)
+OBSERVAÇÕES:  Coordenadas   9º 47’ 06,70” S	65º 31’ 25,10” O
+Nome do responsável pela elaboração da imagem:      Vitor Hugo de Souza
+Data:       08/02/2023
+
+
+FOTOS DA ESTAÇÃO {photos.station_id ->title, ->photographer, ->date} 
+(imagens)
+OBSERVAÇÕES: 
+Nome do responsável que fotografou a estação:   Assis Araujo de Souza
+Data: 24/01/2023
+
