@@ -1,45 +1,171 @@
-**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
+# Migrations SGI 
+Este projeto tem por objetivo a unificação e melhor gerenciamento dos scripts de banco que serão incorporados aos sistemas da Agua&Solo,
+através do ORM Eloquent, de forma a facilitar o gerenciamento e implantação.
 
-When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
+## Instalação 
+Faça o git clone do projeto e, após baixar os arquivos, execute o comando para instalar as dependências
+```
+composer install
+```
+Se necessario também rode:
+```
+composer update
+```
 
-*We recommend that you open this README in another tab as you perform the tasks below. You can [watch our video](https://youtu.be/0ocf7u76WSo) for a full demo of all the steps in this tutorial. Open the video in a new tab to avoid leaving Bitbucket.*
+Ao terminar a instalação, na pasta raíz do projeto, efetue uma cópia do arquivo .env.example e cole-o renomendo para
+.env. 
 
----
+## Comandos Básicos 
+### Rodar as migrations já criadas
+Primeiro crie uma Banco de Dados com o nome agua-solo-db, após rode o comando para gerar as tabelas no branco a partir das migration
 
-## Edit a file
+```
+php artisan migrate
+```
+### Criar uma migration 
+Para criar uma migration.
 
-You’ll start by editing this README file to learn how to edit a file in Bitbucket.
+* execute o comando:
 
-1. Click **Source** on the left side.
-2. Click the README.md link from the list of files.
-3. Click the **Edit** button.
-4. Delete the following text: *Delete this line to make a change to the README from Bitbucket.*
-5. After making your change, click **Commit** and then **Commit** again in the dialog. The commit page will open and you’ll see the change you just made.
-6. Go back to the **Source** page.
+    ```
+     php artisan make:migration {nome_da_migration} --path=database/migrations/{ano-mes}
+    ```
 
----
+Este comando irá criar uma migration na pasta definida pelo ano e mês, conforme estrutura definida pela equipe.<br>
+Conforme convenção, para criar uma migration que cria uma tabela, definimos o {nome_da_migration} pelo prefixo
+create_ e o sufixo _table. 
 
-## Create a file
+* Exemplo: 
+    ```
+    create_name_table_table.
+     
+    alter_name_table_table.
+     
+    insert_name_table_table
+    ``` 
 
-Next, you’ll add a new file to this repository.
+Conforme convenção, para criar uma migração que altere a estrutura de uma tabela, definimos o {nome_da_migration}
+pelo prefixo alter_ e o sufixo _table.
 
-1. Click the **New file** button at the top of the **Source** page.
-2. Give the file a filename of **contributors.txt**.
-3. Enter your name in the empty file space.
-4. Click **Commit** and then **Commit** again in the dialog.
-5. Go back to the **Source** page.
+* Exemplo: 
+    ```
+    alter_name_table_table.
+    ```
 
-Before you move on, go ahead and explore the repository. You've already seen the **Source** page, but check out the **Commits**, **Branches**, and **Settings** pages.
+Conforme convenção, o diretório da pasta é definido pelo {ano-mes} que a migration foi criada. 
+* Exemplo: 
+    ```
+    --path=database/migrations/2024-01
+    ```
 
----
+Um arquivo com a estrutura padrão da migration será criada no diretório definido em --path=. 
 
-## Clone a repository
+### Subir/Reverter migration para o Banco
 
-Use these steps to clone from SourceTree, our client for using the repository command-line free. Cloning allows you to work on your files locally. If you don't yet have SourceTree, [download and install first](https://www.sourcetreeapp.com/). If you prefer to clone from the command line, see [Clone a repository](https://confluence.atlassian.com/x/4whODQ).
+Após criada a migration e modificado o arquivo da migração conforme sua necessidade, para subir a migration para o banco
+definido.
 
-1. You’ll see the clone button under the **Source** heading. Click that button.
-2. Now click **Check out in SourceTree**. You may need to create a SourceTree account or log in.
-3. When you see the **Clone New** dialog in SourceTree, update the destination path and name if you’d like to and then click **Clone**.
-4. Open the directory you just created to see your repository’s files.
+* Rode o comando no terminal: 
+    ```
+    php artisan migrate --path=database/migrations/{ano-mes}
+    ```
+Caso precise reverter a migração que acabou de efetuar.
+* rode o seguinte comando: 
+    ``` 
+    php artisan migrate:rollback --path=database/migrations/{ano-mes}
+    ```
 
-Now that you're more familiar with your Bitbucket repository, go ahead and add a new file locally. You can [push your change back to Bitbucket with SourceTree](https://confluence.atlassian.com/x/iqyBMg), or you can [add, commit,](https://confluence.atlassian.com/x/8QhODQ) and [push from the command line](https://confluence.atlassian.com/x/NQ0zDQ).
+Se as migrations executarem sem erros, uma mensagem de sucesso será mostrada no terminal.<br>
+Caso não, o erro aparacerá no terminal e você poderá corrigí-lo conforme for apontado.
+
+### Estrutura das migrations 
+#### Esqueleto padrão
+Ao criar uma migration, será criado um arquivo na pasta definida seguindo o seguinte esqueleto: 
+
+```
+<?php 
+    use Illuminate\Support\Facades\Schema; 
+    use Illuminate\Database\Schema\Blueprint;
+    use Illuminate\Database\Migrations\Migration; 
+    
+    return new class extends Migration { 
+        /**
+        * Run the migrations.
+        */
+
+        public function up(): void
+        { 
+            Schema::create('name_table', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+            });
+        } 
+        /* Reverse the migrations.
+        *
+        * @return void
+        */
+        public function down(): void
+        {
+            Schema::dropIfExists('name_table');
+        }
+
+    } 
+``` 
+
+### Método up
+
+Dentro da estrutura existe o método public function up(), nele você define o que será criado quando executar o comando:
+```
+php artisan migrate
+```
+
+Para criação de uma tabela, crie a seguinte estrutura dentro do método: 
+```
+    Schema::create(‘name_table’, function(Blueprint $table) { 
+        $table->increments(‘cd_atn_lorem_ipsum’); 
+        $table->integer(‘id_responsavel’); $table->string(‘nm_name’,255); 
+        $table->boolean(‘st_active’);
+        $table->foreign('id_responsible')
+        ->references('id')
+        ->on('user');
+    }); 
+```
+Para criação de uma procedure, cria a seguinte estrutura dentro do método: 
+```
+DB::statement( 
+<<<SQL 
+    -- Crie aqui dentro o código SQL da sua procedure 
+SQL 
+); 
+```
+
+Mais informações a respeito de como montar a estrutura, Acesse a Documentação 
+
+### Método down
+Dentro da estrutura existe o método public function down(), nele você define o que será revertido quando executado o comando
+```
+php artisan migrate:rollback
+```
+Para apagar a tabela, cria a seguinte estrutura dentro do método:
+```
+Schema::table(‘name_table’,function (Blueprint $table) { 
+    $table->dropForeign([‘id_responsible’]); 
+    $table->dropIfExists('lorem_ipsum');
+});
+```
+Para apagar a procedure, cria a seguinte estrutura dentro do método: 
+```
+DB::statement( 
+<<<SQL 
+    -- Crie aqui dentro o código SQL para apagar a procedure 
+SQL
+); 
+```
+Mais informações a respeito de como montar a estrutura, Acesse a Documentação.
+
+### Considerações Finais 
+A documentação está em fase de desenvolvimento, caso encontre algum erro ou falha, favor adicionar correção o comunicar
+ao responsável.
+
+Todas as informações contidas na documentação foram baseadas na documentação oficial do Eloquent. Caso apresente uma
+dúvida específica, favor seguir a Documentação Oficial

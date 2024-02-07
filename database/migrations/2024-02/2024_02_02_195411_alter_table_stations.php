@@ -19,7 +19,7 @@ return new class extends Migration
         -- Ivan Nack                30/01/2024  REV_0.0: Adcionar colunas 
         -- ===================================================================================================== 
         ALTER TABLE `stations` 
-            ADD `basin_id` INT NULL DEFAULT NULL COMMENT 'Bacia ID' AFTER enterprise_id,
+            MODIFY `basin_id` INT NULL DEFAULT NULL COMMENT 'Bacia ID' AFTER enterprise_id,
             ADD `code_PLU` varchar(8) NULL DEFAULT NULL COMMENT 'Codigo PLU' AFTER `basin_id`,
             ADD `code_FLU` varchar(8) NULL DEFAULT NULL COMMENT 'Codigo FLU' AFTER `code_PLU`,
             ADD `river` varchar(50) NULL DEFAULT NULL COMMENT 'rio' AFTER `code_FLU`,
