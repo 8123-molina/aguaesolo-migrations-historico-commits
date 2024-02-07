@@ -18,7 +18,7 @@ return new class extends Migration
 -- ----------------------   ----------  -----------  
 -- Ivan Nack                25/01/2024  REV_0.0: Criação tabela basin (bacias)
 -- ===================================================================================================== 
-CREATE TABLE IF NOT EXISTS `basin` (
+CREATE TABLE IF NOT EXISTS `basins` (
   `id` int NOT NULL AUTO_INCREMENT,
   `key` varchar(64) DEFAULT (uuid()),
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,

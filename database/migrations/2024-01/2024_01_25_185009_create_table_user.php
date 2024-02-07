@@ -18,7 +18,7 @@ return new class extends Migration
 -- ----------------------   ----------  -----------  
 -- Ivan Nack                25/01/2024  REV_0.0: Criação tabela user (usuario)
 -- ===================================================================================================== 
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `username` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,

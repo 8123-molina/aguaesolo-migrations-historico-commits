@@ -18,7 +18,7 @@ return new class extends Migration
 -- ----------------------   ----------  -----------  
 -- Ivan Nack                25/01/2024  REV_0.0: Criação tabela client (cliente)
 -- ===================================================================================================== 
-CREATE TABLE IF NOT EXISTS `client` (
+CREATE TABLE IF NOT EXISTS `clients` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `key` varchar(64) DEFAULT (uuid()),

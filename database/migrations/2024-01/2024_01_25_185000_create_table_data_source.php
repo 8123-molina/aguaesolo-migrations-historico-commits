@@ -18,7 +18,7 @@ return new class extends Migration
 -- ----------------------   ----------  -----------  
 -- Ivan Nack                25/01/2024  REV_0.0: Criação tabela data_source (fonte_dados)
 -- ===================================================================================================== 
-CREATE TABLE IF NOT EXISTS `data_source` (
+CREATE TABLE IF NOT EXISTS `data_sources` (
   `id` int NOT NULL AUTO_INCREMENT,
   `key` varchar(64) DEFAULT (uuid()),
   `name` varchar(45) DEFAULT NULL,

@@ -18,7 +18,7 @@ return new class extends Migration
 -- ----------------------   ----------  -----------  
 -- Ivan Nack                25/01/2024  REV_0.0: Criação tabela user_enterprise (usuari_estacao)
 -- ===================================================================================================== 
-CREATE TABLE IF NOT EXISTS `user_station` (
+CREATE TABLE IF NOT EXISTS `user_stations` (
   `user_id` int NOT NULL,
   `station_id` int NOT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `user_station` (
   PRIMARY KEY (`user_id`,`station_id`),
   KEY `fk_station` (`station_id`),
   CONSTRAINT `fk_user_station_estacao` FOREIGN KEY (`station_id`) REFERENCES `stations` (`id`),
-  CONSTRAINT `fk_user_station_usuario` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+  CONSTRAINT `fk_user_station_usuario` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 SQL
         );

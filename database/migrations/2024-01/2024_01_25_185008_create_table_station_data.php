@@ -18,7 +18,7 @@ return new class extends Migration
 -- ----------------------   ----------  -----------  
 -- Ivan Nack                25/01/2024  REV_0.0: Criação tabela station_data (estacao_dado)
 -- ===================================================================================================== 
-CREATE TABLE IF NOT EXISTS `station_data` (
+CREATE TABLE IF NOT EXISTS `station_datas` (
   `station_id` int NOT NULL,
   `date` datetime NOT NULL,
   `level` decimal(10,2) DEFAULT NULL COMMENT 'Nível',

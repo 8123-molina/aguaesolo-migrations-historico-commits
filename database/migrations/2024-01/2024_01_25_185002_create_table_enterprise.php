@@ -18,7 +18,7 @@ return new class extends Migration
 -- ----------------------   ----------  -----------  
 -- Ivan Nack                25/01/2024  REV_0.0: Criação tabela enterprise (empresa)
 -- ===================================================================================================== 
-CREATE TABLE IF NOT EXISTS `enterprise` (
+CREATE TABLE IF NOT EXISTS `enterprises` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `key` varchar(64) DEFAULT (uuid()),
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `enterprise` (
   `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `fk_empreendimentos_client_idx` (`client_id`),
-  CONSTRAINT `fk_empreendimentos_client` FOREIGN KEY (`client_id`) REFERENCES `client` (`id`)
+  CONSTRAINT `fk_empreendimentos_client` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 SQL
                     );

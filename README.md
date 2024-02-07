@@ -17,7 +17,7 @@ Ao terminar a instalação, na pasta raíz do projeto, efetue uma cópia do arqu
 
 ## Comandos Básicos 
 ### Rodar as migrations já criadas
-Primeiro crie uma Banco de Dados com o nome agua-solo-db, após rode o comando para gerar as tabelas no branco a partir das migration
+Primeiro crie uma Banco de Dados com o nome {aguaesolo}, após rode o comando para gerar as tabelas no branco a partir das migration
 
 ```
 php artisan migrate

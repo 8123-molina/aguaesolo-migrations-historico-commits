@@ -18,7 +18,7 @@ return new class extends Migration
 -- ----------------------   ----------  -----------  
 -- Ivan Nack                25/01/2024  REV_0.0: Criação tabela contact (contato)
 -- ===================================================================================================== 
-CREATE TABLE IF NOT EXISTS `contact` (
+CREATE TABLE IF NOT EXISTS `contacts` (
   `id` int NOT NULL AUTO_INCREMENT,
   `key` varchar(64) DEFAULT (uuid()),
   `name` varchar(45) NOT NULL,
@@ -41,6 +41,6 @@ SQL
      */
     public function down(): void
     {
-        Schema::dropIfExists('table_contact');
+        Schema::dropIfExists('table_contacts');
     }
 };

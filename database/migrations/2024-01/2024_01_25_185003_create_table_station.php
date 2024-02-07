@@ -18,7 +18,7 @@ return new class extends Migration
 -- ----------------------   ----------  -----------  
 -- Ivan Nack                25/01/2024  REV_0.0: Criação tabela station (estacao)
 -- ===================================================================================================== 
-CREATE TABLE IF NOT EXISTS `station` (
+CREATE TABLE IF NOT EXISTS `stations` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `key` varchar(64) DEFAULT (uuid()),
@@ -39,12 +39,12 @@ CREATE TABLE IF NOT EXISTS `station` (
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `data_update` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `fk_station_empreendimentos1_idx` (`enterprise_id`),
-  KEY `fk_station_data_source` (`data_source_id`),
-  KEY `fk_station_basin` (`basin_id`),
-  CONSTRAINT `fk_station_basin` FOREIGN KEY (`basin_id`) REFERENCES `basin` (`id`),
-  CONSTRAINT `fk_station_enterprise` FOREIGN KEY (`enterprise_id`) REFERENCES `enterprise` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `fk_station_data_source` FOREIGN KEY (`data_source_id`) REFERENCES `data_source` (`id`)
+  KEY `fk_stations_empreendimentos1_idx` (`enterprise_id`),
+  KEY `fk_stations_data_source` (`data_source_id`),
+  KEY `fk_stations_basin` (`basin_id`),
+  CONSTRAINT `fk_stations_basin` FOREIGN KEY (`basin_id`) REFERENCES `basins` (`id`),
+  CONSTRAINT `fk_stations_enterprise` FOREIGN KEY (`enterprise_id`) REFERENCES `enterprises` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_stations_data_source` FOREIGN KEY (`data_source_id`) REFERENCES `data_sources` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 SQL
                     );
