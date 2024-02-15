@@ -11,18 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('clients', function (Blueprint $table) {
-            $table->integer('contact_id')->nullable()->default(null)->change();
-        });
+        DB::statement(
+<<<SQL
+    ALTER TABLE aguaesolo.clients MODIFY COLUMN contact_id int NULL DEFAULT NULL;
+SQL
+        );
     }
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::table('clients', function (Blueprint $table) {
-            $table->string('contact_id')->default(null)->change();
-        });
+        //
     }
 };
