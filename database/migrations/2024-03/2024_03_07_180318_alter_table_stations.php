@@ -14,9 +14,7 @@ return new class extends Migration
     {
         DB::statement(
 <<<SQL
-        ALTER TABLE `stations`
-	        DROP COLUMN `stations_equipaments_id`,
-            DROP INDEX `fk_station_equipaments`;
+ALTER TABLE aguaesolo.stations DROP FOREIGN KEY fk_station_equipaments;
 SQL
         );
     }
