@@ -14,7 +14,7 @@ return new class extends Migration
     {
         DB::statement(
 <<<SQL
-ALTER TABLE aguaesolo.stations DROP FOREIGN KEY fk_station_equipaments;
+-- ALTER TABLE aguaesolo.stations DROP FOREIGN KEY fk_station_equipaments;
 SQL
         );
     }
